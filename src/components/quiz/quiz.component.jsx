@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 
-import Splash from "./components/splash/splash.component";
-import Quiz from "./components/quiz/quiz.component"
-import Scoreboard from "./components/scoreboard/scoreboard.component";
-import Timer from "./components/timer/timer.component";
-import Question from "./components/question/question.component";
-import Choices from "./components/choices/choices.component";
-import ResultsPage from "./components/results-page/results-page.component";
+import Scoreboard from "../scoreboard/scoreboard.component";
+import Timer from "../timer/timer.component";
+import Question from "../question/question.component";
+import Choices from "../choices/choices.component";
 
-import './App.css';
 
-function App() {
+
+import "./quiz.styles.scss";
+
+const Quiz = () => {
   const [question, setQuestion] = useState();
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [answers, setAnswers] = useState([]);
   const [showScore, setShowScore] = useState(false);
-  const [showSplash, setShowSplash] = useState(true);
   const [currentScore, setCurrentScore] = useState(0);
 
   const requestPokemon = async() => {
@@ -67,30 +65,6 @@ function App() {
     }
   };
 
-  const restartQuiz = () => {
-    setAnswers([]);
-    setSelectedAnswer('');
-    setShowScore(false);
-    setCurrentScore(0);
-    setShowSplash(false);
-  }
-
-  if (question === undefined) return null;
-  
-  // if (showSplash) {
-  //   return <Splash restartQuiz={restartQuiz}/>;
-  // }
-    
-  if (showScore) {
-    return (
-      <ResultsPage
-        currentScore={currentScore}
-        answers={answers}
-        restartQuiz={restartQuiz}
-      />
-    );
-  }
-      
   return (
     <div className="main-container">
       <Scoreboard score={currentScore} total={answers.length} />
@@ -104,7 +78,7 @@ function App() {
         handleClick={handleClick}
       />
     </div>
-  );
+  )
 };
 
-export default App;
+export default Quiz;

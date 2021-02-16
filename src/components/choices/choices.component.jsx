@@ -15,26 +15,13 @@ const  Choices = ({ question, handleClick, selectedAnswer }) => {
 
   return (
     <div className="choices-container">
-      <Choice
-        choice={(shuffledChoices[0].name).toUpperCase()}
-        handleClick={handleClick} 
-        selected={selectedAnswer === (shuffledChoices[0].name).toUpperCase()} 
-      />
-      <Choice
-        choice={(shuffledChoices[1].name).toUpperCase()}
-        handleClick={handleClick} 
-        selected={selectedAnswer === (shuffledChoices[1].name).toUpperCase()} 
-      />
-      <Choice
-        choice={(shuffledChoices[2].name).toUpperCase()}
-        handleClick={handleClick} 
-        selected={selectedAnswer === (shuffledChoices[2].name).toUpperCase()} 
-      />
-      <Choice
-        choice={(shuffledChoices[3].name).toUpperCase()}
-        handleClick={handleClick} 
-        selected={selectedAnswer === (shuffledChoices[3].name).toUpperCase()} 
-      />
+      {shuffledChoices.map(choice => (
+        <Choice
+          choice={(choice.name).toUpperCase()}
+          handleClick={handleClick} 
+          selected={selectedAnswer === (choice.name).toUpperCase()} 
+        />
+      ))}
     </div>
   )
 };

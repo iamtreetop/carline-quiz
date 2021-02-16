@@ -1,0 +1,25 @@
+body {
+  /* background-image: url("https://i.imgur.com/HddtBOT.png");
+  background-repeat: no-repeat;
+  background-size: cover; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: auto;
+}
+
+img {
+  height: 250px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
