@@ -35,7 +35,7 @@ function App() {
   }, []);
 
   const handleClick = (e) => {
-    debugger
+    // debugger
     setSelectedAnswer(e.target.value);
     keepScore(question, e.target.value);
     nextQuestion();
