@@ -4,33 +4,30 @@ import Choice from "../choice/choice.component";
 
 import './choices.styles.scss';
 
-const  Choices = ({ question }) => {
+const  Choices = ({ question, handleClick, selectedAnswer }) => {
   // randomization here
+  debugger
   return (
     <div className="choices-container">
       <Choice
-        // value={question[0]}
-        choice={question[0].name}
-        // handleClick={handleClick} 
-        // selected={currentAnswer === question.choice_a} 
+        choice={(question[0].name).toUpperCase()}
+        handleClick={handleClick} 
+        selected={selectedAnswer === (question[0].name).toUpperCase()} 
       />
       <Choice
-        // value={question[0]}
-        choice={question[1].name}
-        // handleClick={handleClick} 
-        // selected={currentAnswer === question.choice_a} 
+        choice={(question[1].name).toUpperCase()}
+        handleClick={handleClick} 
+        selected={selectedAnswer === (question[1].name).toUpperCase()} 
       />
       <Choice
-        // value={question[0]}
-        choice={question[2].name}
-        // handleClick={handleClick} 
-        // selected={currentAnswer === question.choice_a} 
+        choice={(question[2].name).toUpperCase()}
+        handleClick={handleClick} 
+        selected={selectedAnswer === (question[2].name).toUpperCase()} 
       />
       <Choice
-        // value={question[0]}
-        choice={question[3].name}
-        // handleClick={handleClick} 
-        // selected={currentAnswer === question.choice_a} 
+        choice={(question[3].name).toUpperCase()}
+        handleClick={handleClick} 
+        selected={selectedAnswer === (question[3].name).toUpperCase()} 
       />
     </div>
   )

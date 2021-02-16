@@ -11,7 +11,6 @@ const Question = ({ question }) => {
 
   const getPokemonImage = async() => {
     const pokemon = await axios.get(questionUrl);
-    debugger
     setPokeImage(pokemon.data.sprites.front_default)
   }
 
@@ -19,7 +18,6 @@ const Question = ({ question }) => {
     getPokemonImage();
   });
 
-  // console.log(getPokemonImage(questionUrl))
   return (
     <div className="scoreboard-container">
       <img src={pokeImage} alt="" />

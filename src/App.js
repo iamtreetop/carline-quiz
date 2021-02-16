@@ -17,13 +17,14 @@ function getRandomNum(min, max) {
 function App() {
 
   const [question, setQuestion] = useState()
+  const [selectedAnswer, setSelectedAnswer] = useState("");
+  const [answers, setAnswers] = useState([])
 
   const requestPokemon = async() => {
     let num = getRandomNum(1, 894);
     const pokemon = await axios.get(
       `https://pokeapi.co/api/v2/pokemon/?limit=4&offset=${num}`
     );
-    console.log(pokemon.data.results)
     setQuestion(pokemon.data.results);
   }
 
@@ -31,7 +32,26 @@ function App() {
     requestPokemon();
   }, []);
 
-  // let currentQuestion = question
+  const handleClick = (e) => {
+    debugger
+    console.log(e)
+    setSelectedAnswer(e.target.value);
+    nextQuestion();
+  };
+
+  const nextQuestion = () => {
+    const answer = {answer: selectedAnswer}
+
+    answers.push(answer);
+    setAnswers(answers);
+    setSelectedAnswer('');
+
+    if (answers.length < 10) {
+      requestPokemon();
+      return;
+    }
+  };
+
   if (question === undefined) return null;
   
   return (
@@ -39,12 +59,16 @@ function App() {
       <h1>Name That Pokemon</h1>
       <Scoreboard score="1" total="3" />
       <h2>TIMER</h2>
-      <Question question={question} />
+      <Question 
+        question={question}
+      />
       <Choices
         question={question}
+        selectedAnswer = {selectedAnswer}
+        handleClick={handleClick}
       />
     </div>
   );
-}
+};
 
 export default App;
