@@ -18,6 +18,8 @@ function App() {
   const [showScore, setShowScore] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
   const [currentScore, setCurrentScore] = useState(0);
+  const [seconds, setSeconds] = useState(5);
+  const [isClicked, setIsClicked] = useState(false)
 
   const requestPokemon = async() => {
     let num = getRandomNum(1, 894);
@@ -31,6 +33,16 @@ function App() {
       requestPokemon();
   }, []);
 
+  useEffect(() => {
+  // console.log(seconds)
+    if (seconds > 0) {
+      setTimeout(() => setSeconds(seconds - 1), 1000);
+    } else {
+      return nextQuestion();
+      // setSeconds(5)
+    }
+  }, [seconds]);
+
   function getRandomNum(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -41,6 +53,7 @@ function App() {
     setSelectedAnswer(e.target.value);
     keepScore(question, e.target.value);
     nextQuestion();
+    resetTimer();
   };
 
   const nextQuestion = () => {
@@ -49,6 +62,8 @@ function App() {
     answers.push(answer);
     setAnswers(answers);
     setSelectedAnswer('');
+    setSeconds(5);
+    setIsClicked(false)
 
     if (answers.length < 10) {
       requestPokemon();
@@ -65,6 +80,10 @@ function App() {
     } else {
       setCurrentScore(currentScore)
     }
+  };
+
+  const resetTimer = () => {
+    setSeconds(5);
   };
 
   const restartQuiz = () => {
@@ -94,7 +113,7 @@ function App() {
   return (
     <div className="main-container">
       <Scoreboard score={currentScore} total={answers.length} />
-      <Timer nextQuestion={nextQuestion} />
+      <Timer seconds={seconds} />
       <Question 
         question={question}
       />
@@ -104,7 +123,7 @@ function App() {
         handleClick={handleClick}
       />
     </div>
-  );
+  )
 };
 
 export default App;

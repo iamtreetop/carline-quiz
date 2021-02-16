@@ -7,7 +7,7 @@ const Choice = ({ choice, handleClick }) => {
     <button 
       className="choice" 
       value={choice}
-      onClick={handleClick}
+      // onClick={() => handleClick; resetTimer();}
     >
       {choice}
     </button>

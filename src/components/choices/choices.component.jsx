@@ -4,7 +4,7 @@ import Choice from "../choice/choice.component";
 
 import './choices.styles.scss';
 
-const  Choices = ({ question, handleClick, selectedAnswer }) => {
+const  Choices = ({ question, handleClick, selectedAnswer, resetTimer }) => {
 
   const shuffledChoices = [
     question[0],
@@ -15,8 +15,9 @@ const  Choices = ({ question, handleClick, selectedAnswer }) => {
 
   return (
     <div className="choices-container">
-      {shuffledChoices.map(choice => (
+      {shuffledChoices.map((choice, idx) => (
         <Choice
+          key={idx}
           choice={(choice.name).toUpperCase()}
           handleClick={handleClick} 
           selected={selectedAnswer === (choice.name).toUpperCase()} 
