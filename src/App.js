@@ -4,7 +4,9 @@ import axios from 'axios'
 import Splash from "./components/splash/splash.component";
 import Scoreboard from "./components/scoreboard/scoreboard.component";
 import Question from "./components/question/question.component";
-import Choices from "./components/choices/choices.component"
+import Choices from "./components/choices/choices.component";
+import CustomButton from "./components/custom-button/custom-button.component";
+import ResultsPage from "./components/results-page/results-page.component";
 
 import './App.css';
 
@@ -82,14 +84,12 @@ function App() {
   } else {
     if (showScore) {
       return (
-        <div className="main-container scores">
-          <h2> RESULTS </h2>
-          <h2> {currentScore} / {answers.length} </h2>
-          <button onClick={restartQuiz}>
-            Play Again
-          </button>
-        </div>
-      )
+        <ResultsPage
+          currentScore={currentScore}
+          answers={answers}
+          restartQuiz={restartQuiz}
+        />
+      );
     } else {
       return (
         <div className="main-container">
