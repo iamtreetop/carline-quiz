@@ -5,32 +5,30 @@ import Choice from "../choice/choice.component";
 import './choices.styles.scss';
 
 const  Choices = ({ question }) => {
-  debugger
-
   // randomization here
   return (
     <div className="choices-container">
       <Choice
         // value={question[0]}
-        choice={"choice 1"}
+        choice={question[0].name}
         // handleClick={handleClick} 
         // selected={currentAnswer === question.choice_a} 
       />
       <Choice
         // value={question[0]}
-        choice={"choice 2"}
+        choice={question[1].name}
         // handleClick={handleClick} 
         // selected={currentAnswer === question.choice_a} 
       />
       <Choice
         // value={question[0]}
-        choice={"choice 3"}
+        choice={question[2].name}
         // handleClick={handleClick} 
         // selected={currentAnswer === question.choice_a} 
       />
       <Choice
         // value={question[0]}
-        choice={"choice 4"}
+        choice={question[3].name}
         // handleClick={handleClick} 
         // selected={currentAnswer === question.choice_a} 
       />

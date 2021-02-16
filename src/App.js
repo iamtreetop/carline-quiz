@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 
+import Splash from "./components/splash/splash.component";
 import Scoreboard from "./components/scoreboard/scoreboard.component";
 import Question from "./components/question/question.component";
 import Choices from "./components/choices/choices.component"
@@ -27,16 +28,16 @@ function App() {
   }
 
   useEffect(() => {
-    debugger
     requestPokemon();
   }, []);
 
   // let currentQuestion = question
-
+  if (question === undefined) return null;
+  
   return (
     <div className="main-container">
       <h1>Name That Pokemon</h1>
-      <Scoreboard total="3" score="1" />
+      <Scoreboard score="1" total="3" />
       <h2>TIMER</h2>
       <Question question={question} />
       <Choices
