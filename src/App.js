@@ -20,6 +20,7 @@ function App() {
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [answers, setAnswers] = useState([]);
   const [showScore, setShowScore] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
   const [currentScore, setCurrentScore] = useState(0)
 
   const requestPokemon = async() => {
@@ -71,36 +72,41 @@ function App() {
     setSelectedAnswer('');
     setShowScore(false);
     setCurrentScore(0);
+    setShowSplash(false);
   }
 
   if (question === undefined) return null;
   
-  if (showScore) {
-    return (
-      <div className="main-container scores">
-        <h2> RESULTS </h2>
-        <h2> {currentScore} / {answers.length} </h2>
-        <button onClick={restartQuiz}>
-          Play Again
-        </button>
-      </div>
-    )
+  if (showSplash) {
+    return <Splash restartQuiz={restartQuiz}/>;
   } else {
-    return (
-      <div className="main-container">
-        <h1>Name That Pokemon</h1>
-        <Scoreboard score={currentScore} total={answers.length} />
-        <h2>TIMER</h2>
-        <Question 
-          question={question}
-        />
-        <Choices
-          question={question}
-          selectedAnswer = {selectedAnswer}
-          handleClick={handleClick}
-        />
-      </div>
-    );
+    if (showScore) {
+      return (
+        <div className="main-container scores">
+          <h2> RESULTS </h2>
+          <h2> {currentScore} / {answers.length} </h2>
+          <button onClick={restartQuiz}>
+            Play Again
+          </button>
+        </div>
+      )
+    } else {
+      return (
+        <div className="main-container">
+          <h1>Name That Pokemon</h1>
+          <Scoreboard score={currentScore} total={answers.length} />
+          <h2>TIMER</h2>
+          <Question 
+            question={question}
+          />
+          <Choices
+            question={question}
+            selectedAnswer = {selectedAnswer}
+            handleClick={handleClick}
+          />
+        </div>
+      );
+    }
   }
 };
 
