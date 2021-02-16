@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 
 import Splash from "./components/splash/splash.component";
-import Quiz from "./components/quiz/quiz.component"
 import Scoreboard from "./components/scoreboard/scoreboard.component";
 import Timer from "./components/timer/timer.component";
 import Question from "./components/question/question.component";
@@ -18,7 +17,6 @@ function App() {
   const [showScore, setShowScore] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
   const [currentScore, setCurrentScore] = useState(0);
-  // const [seconds, setSeconds] = useState(5);
   const [isClicked, setIsClicked] = useState(false)
 
   const requestPokemon = async() => {
@@ -31,7 +29,7 @@ function App() {
 
   useEffect(() => {
       requestPokemon();
-  }, []);
+  },[]);
 
 
   function getRandomNum(min, max) {
@@ -53,8 +51,6 @@ function App() {
     answers.push(answer);
     setAnswers(answers);
     setSelectedAnswer('');
-    // setSeconds(5);
-    // setIsClicked(false)
 
     if (answers.length < 10) {
       requestPokemon();
@@ -111,7 +107,7 @@ function App() {
       />
       <Choices
         question={question}
-        selectedAnswer = {selectedAnswer}
+        selectedAnswer={selectedAnswer}
         handleClick={handleClick}
       />
     </div>

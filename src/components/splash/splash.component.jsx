@@ -8,7 +8,7 @@ const Splash = ({ restartQuiz }) => {
  return (
    <div className="splash-container">
      <h1>NAME THAT POKEMON!</h1>
-     <CustomButton onClick={restartQuiz}>Start Game</CustomButton>
+     <CustomButton onClick={restartQuiz}>Start</CustomButton>
    </div>
  ) 
 };

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 
-import './question.styles.scss';
-
 const Question = ({ question }) => {
 
   const [pokeImage, setPokeImage] = useState()
