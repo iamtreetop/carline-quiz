@@ -5,8 +5,6 @@ import Choice from "../choice/choice.component";
 import './choices.styles.scss';
 
 const  Choices = ({ question, handleClick, selectedAnswer }) => {
-  // randomization here
-  debugger
 
   const shuffledChoices = [
     question[0],

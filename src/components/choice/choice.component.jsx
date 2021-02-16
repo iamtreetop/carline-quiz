@@ -3,7 +3,6 @@ import React from 'react';
 import './choice.styles.scss';
 
 const Choice = ({ choice, handleClick }) => {
-  debugger
   return (
     <button 
       className="choice" 

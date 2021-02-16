@@ -13,11 +13,13 @@ img {
   height: 250px;
 }
 
+button {
+  cursor: pointer;
+}
+
 .main-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* margin: auto; */
   align-items: center;
-  border: 2px solid black;
 }

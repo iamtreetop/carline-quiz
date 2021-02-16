@@ -7,8 +7,8 @@ import './results-page.styles.scss';
 const ResultsPage = ({ currentScore, answers, restartQuiz}) => {
   return (
     <div className="results-container">
-      <h2> RESULTS </h2>
-      <h2> {currentScore} / {answers.length} </h2>
+      <h1> Your Score is: </h1>
+      <span> {currentScore} / {answers.length} </span>
       <CustomButton onClick={restartQuiz}>
         Play Again
       </CustomButton>
