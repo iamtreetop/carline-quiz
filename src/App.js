@@ -15,7 +15,7 @@ function getRandomNum(min, max) {
 
 function App() {
 
-  const [question, setQuestion] = useState({})
+  const [question, setQuestion] = useState()
 
   const requestPokemon = async() => {
     let num = getRandomNum(1, 894);
@@ -27,6 +27,7 @@ function App() {
   }
 
   useEffect(() => {
+    debugger
     requestPokemon();
   }, []);
 
@@ -35,10 +36,9 @@ function App() {
   return (
     <div className="main-container">
       <h1>Name That Pokemon</h1>
-      <Scoreboard total="3" score="1">SCOREBOARD</Scoreboard>
+      <Scoreboard total="3" score="1" />
       <h2>TIMER</h2>
       <Question question={question} />
-
       <Choices
         question={question}
       />

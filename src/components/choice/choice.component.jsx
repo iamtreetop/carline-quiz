@@ -5,7 +5,7 @@ import './choice.styles.scss';
 const Choice = ({ choice }) => {
 
   return (
-    <button value={choice}>
+    <button className="choice" value={choice}>
       {choice}
     </button>
   )
