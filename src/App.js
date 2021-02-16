@@ -16,10 +16,11 @@ function getRandomNum(min, max) {
 
 function App() {
 
-  const [question, setQuestion] = useState()
+  const [question, setQuestion] = useState();
   const [selectedAnswer, setSelectedAnswer] = useState("");
-  const [answers, setAnswers] = useState([])
-  const [showScore, setShowScore] = useState(false)
+  const [answers, setAnswers] = useState([]);
+  const [showScore, setShowScore] = useState(false);
+  const [currentScore, setCurrentScore] = useState(0)
 
   const requestPokemon = async() => {
     let num = getRandomNum(1, 894);
@@ -35,8 +36,8 @@ function App() {
 
   const handleClick = (e) => {
     debugger
-    console.log(e)
     setSelectedAnswer(e.target.value);
+    keepScore(question, e.target.value);
     nextQuestion();
   };
 
@@ -55,10 +56,21 @@ function App() {
     setShowScore(true);
   };
 
+  const keepScore = (question, choice) => {
+    debugger
+    let currentAnswer = (question[0].name).toUpperCase();
+    if (currentAnswer === choice) {
+      setCurrentScore(currentScore + 1)
+    } else {
+      setCurrentScore(currentScore)
+    }
+  };
+
   const restartQuiz = () => {
     setAnswers([]);
     setSelectedAnswer('');
     setShowScore(false);
+    setCurrentScore(0);
   }
 
   if (question === undefined) return null;
@@ -67,7 +79,7 @@ function App() {
     return (
       <div className="main-container scores">
         <h2> RESULTS </h2>
-        <h2> 1 / {answers.length} </h2>
+        <h2> {currentScore} / {answers.length} </h2>
         <button onClick={restartQuiz}>
           Play Again
         </button>
@@ -77,7 +89,7 @@ function App() {
     return (
       <div className="main-container">
         <h1>Name That Pokemon</h1>
-        <Scoreboard score="2" total={answers.length + 1} />
+        <Scoreboard score={currentScore} total={answers.length} />
         <h2>TIMER</h2>
         <Question 
           question={question}
