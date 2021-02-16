@@ -4,7 +4,7 @@ import Choice from "../choice/choice.component";
 
 import './choices.styles.scss';
 
-const  Choices = ({ question, handleClick, selectedAnswer, resetTimer }) => {
+const  Choices = ({ question, handleClick, selectedAnswer }) => {
 
   const shuffledChoices = [
     question[0],

@@ -18,7 +18,7 @@ function App() {
   const [showScore, setShowScore] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
   const [currentScore, setCurrentScore] = useState(0);
-  const [seconds, setSeconds] = useState(5);
+  // const [seconds, setSeconds] = useState(5);
   const [isClicked, setIsClicked] = useState(false)
 
   const requestPokemon = async() => {
@@ -33,15 +33,6 @@ function App() {
       requestPokemon();
   }, []);
 
-  useEffect(() => {
-  // console.log(seconds)
-    if (seconds > 0) {
-      setTimeout(() => setSeconds(seconds - 1), 1000);
-    } else {
-      return nextQuestion();
-      // setSeconds(5)
-    }
-  }, [seconds]);
 
   function getRandomNum(min, max) {
     min = Math.ceil(min);
@@ -52,8 +43,8 @@ function App() {
   const handleClick = (e) => {
     setSelectedAnswer(e.target.value);
     keepScore(question, e.target.value);
+    setIsClicked(true);
     nextQuestion();
-    resetTimer();
   };
 
   const nextQuestion = () => {
@@ -62,8 +53,8 @@ function App() {
     answers.push(answer);
     setAnswers(answers);
     setSelectedAnswer('');
-    setSeconds(5);
-    setIsClicked(false)
+    // setSeconds(5);
+    // setIsClicked(false)
 
     if (answers.length < 10) {
       requestPokemon();
@@ -82,23 +73,20 @@ function App() {
     }
   };
 
-  const resetTimer = () => {
-    setSeconds(5);
-  };
-
   const restartQuiz = () => {
     setAnswers([]);
     setSelectedAnswer('');
     setShowScore(false);
     setCurrentScore(0);
     setShowSplash(false);
+    setIsClicked(false);
   }
 
   if (question === undefined) return null;
   
-  // if (showSplash) {
-  //   return <Splash restartQuiz={restartQuiz}/>;
-  // }
+  if (showSplash) {
+    return <Splash restartQuiz={restartQuiz}/>;
+  }
     
   if (showScore) {
     return (
@@ -113,7 +101,11 @@ function App() {
   return (
     <div className="main-container">
       <Scoreboard score={currentScore} total={answers.length} />
-      <Timer seconds={seconds} />
+      <Timer 
+        nextQuestion={nextQuestion} 
+        clicked={isClicked} 
+        setClicked={setIsClicked}
+      />
       <Question 
         question={question}
       />

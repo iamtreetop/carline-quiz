@@ -2,39 +2,27 @@ import React, { useState, useEffect } from 'react';
 
 import "./timer.styles.scss";
 
-const Timer = ({ seconds }) => {
-  // const [seconds, setSeconds] = useState(currentSeconds);
-  // const [isActive, setIsActive] = useState(true)
+const Timer = ({ nextQuestion, clicked, setClicked}) => {
 
-  // // const checkTime = (seconds) => {
-  // //   if (seconds === )
-  // // }
+  const [seconds, setSeconds] = useState(5);
 
-  // useEffect(() => {
-  //   // console.log(seconds)
-  //   if (seconds > 0) {
-  //     setTimeout(() => setSeconds(seconds - 1), 1000);
-  //   } else {
-  //     return nextQuestion();
-  //     // setSeconds(5)
-  //   }
-
-  //   // const decrement = setInterval(timer, 1000);
-  //   // function timer() {
-  //   //   seconds--;
-  //   //   setSeconds(seconds);
-  //   //   if (seconds <= 0) {
-  //   //     clearInterval(decrement)
-  //   //   };
-  //   // } 
-  // }, [seconds, isActive]);
-
-  // if (!isActive) return () => nextQuestion();
+  useEffect(() => {
+    let interval = setTimeout(() => setSeconds(seconds - 1), 1000);
+    if (clicked) {
+      clearTimeout(interval);
+      setSeconds(5);
+      setClicked(false);
+      return;
+    } else if (seconds <= 0) {
+      clearTimeout(interval)
+      nextQuestion();
+      setSeconds(5);
+      setClicked(false);
+      return;
+    }
+  }, [seconds]);
   
   return (
-    // {
-    //   if (seconds === 0) return nextQuestion();
-    // }
     <div className="timer-container">
       <span>Time Left : {seconds}</span>
     </div>
