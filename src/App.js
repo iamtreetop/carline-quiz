@@ -19,6 +19,7 @@ function App() {
   const [question, setQuestion] = useState()
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [answers, setAnswers] = useState([])
+  const [showScore, setShowScore] = useState(false)
 
   const requestPokemon = async() => {
     let num = getRandomNum(1, 894);
@@ -50,25 +51,45 @@ function App() {
       requestPokemon();
       return;
     }
+
+    setShowScore(true);
   };
+
+  const restartQuiz = () => {
+    setAnswers([]);
+    setSelectedAnswer('');
+    setShowScore(false);
+  }
 
   if (question === undefined) return null;
   
-  return (
-    <div className="main-container">
-      <h1>Name That Pokemon</h1>
-      <Scoreboard score="1" total="3" />
-      <h2>TIMER</h2>
-      <Question 
-        question={question}
-      />
-      <Choices
-        question={question}
-        selectedAnswer = {selectedAnswer}
-        handleClick={handleClick}
-      />
-    </div>
-  );
+  if (showScore) {
+    return (
+      <div className="main-container scores">
+        <h2> RESULTS </h2>
+        <h2> 1 / {answers.length} </h2>
+        <button onClick={restartQuiz}>
+          Play Again
+        </button>
+      </div>
+    )
+  } else {
+    return (
+      <div className="main-container">
+        <h1>Name That Pokemon</h1>
+        <Scoreboard score="2" total={answers.length + 1} />
+        <h2>TIMER</h2>
+        <Question 
+          question={question}
+        />
+        <Choices
+          question={question}
+          selectedAnswer = {selectedAnswer}
+          handleClick={handleClick}
+        />
+      </div>
+    );
+  }
 };
 
 export default App;
