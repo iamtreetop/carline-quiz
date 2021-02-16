@@ -1,23 +1,47 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'
+
+import Scoreboard from "./components/scoreboard/scoreboard.component";
+import Question from "./components/question/question.component";
+import Choices from "./components/choices/choices.component"
+
 import './App.css';
 
+function getRandomNum(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
 function App() {
+
+  const [question, setQuestion] = useState({})
+
+  const requestPokemon = async() => {
+    let num = getRandomNum(1, 894);
+    const pokemon = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon/?limit=4&offset=${num}`
+    );
+    console.log(pokemon.data.results)
+    setQuestion(pokemon.data.results);
+  }
+
+  useEffect(() => {
+    requestPokemon();
+  }, []);
+
+  // let currentQuestion = question
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main-container">
+      <h1>Name That Pokemon</h1>
+      <Scoreboard total="3" score="1">SCOREBOARD</Scoreboard>
+      <h2>TIMER</h2>
+      <Question question={question} />
+
+      <Choices
+        question={question}
+      />
     </div>
   );
 }
